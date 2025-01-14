@@ -6,7 +6,7 @@
 /*   By: yel-mens <yel-mens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 16:43:22 by yel-mens          #+#    #+#             */
-/*   Updated: 2025/01/14 12:59:03 by yel-mens         ###   ########.fr       */
+/*   Updated: 2025/01/14 15:40:54 by yel-mens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int main(void)
 	ft_put_image(game->backgrounds[4], 0, 340, game->buffer);
 	mlx_put_image_to_window(game->mlx, game->win, game->buffer->img, 0, 0);
 
-	mlx_key_hook(game->win, ft_handle_input, game);
+	mlx_hook(game->win, KeyPress, KeyPressMask,ft_handle_input, game);
 	mlx_loop(game->mlx);
 	ft_mini_free(game);
 	return (EXIT_SUCCESS);

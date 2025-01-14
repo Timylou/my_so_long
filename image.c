@@ -6,7 +6,7 @@
 /*   By: yel-mens <yel-mens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 16:44:06 by yel-mens          #+#    #+#             */
-/*   Updated: 2025/01/14 15:05:22 by yel-mens         ###   ########.fr       */
+/*   Updated: 2025/01/14 15:54:54 by yel-mens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,10 @@ void	ft_put_image(t_img *img, int x_offset, int y_offset, t_img *buffer)
 	if (!buffer || !img)
 		return ;
 	y = 0;
-	while (y < img->height)
+	while (y <= img->height)
 	{
 		x = 0;
-		while (x < img->width)
+		while (x <= img->width)
 		{
 			color = ft_get_pixel(img, x, y);
 			if (color >= 0)

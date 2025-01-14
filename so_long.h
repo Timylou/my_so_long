@@ -6,7 +6,7 @@
 /*   By: yel-mens <yel-mens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 16:36:36 by yel-mens          #+#    #+#             */
-/*   Updated: 2025/01/14 15:05:36 by yel-mens         ###   ########.fr       */
+/*   Updated: 2025/01/14 15:40:23 by yel-mens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 # include <stdlib.h>
 # include <stdio.h>
 # include <X11/keysym.h>
+# include <X11/X.h>
 # include "minilibx-linux/mlx.h"
 
 typedef struct s_img
