@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yel-mens <yel-mens@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yel-mens <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 16:36:36 by yel-mens          #+#    #+#             */
-/*   Updated: 2025/01/14 15:40:23 by yel-mens         ###   ########.fr       */
+/*   Updated: 2025/01/15 20:00:05 by yel-mens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ typedef struct s_game
 	void		*mlx;
 	void		*win;
 	t_img		**backgrounds;
+	t_img		**platform;
 	t_img		*buffer;
 	int			width;
 	int			height;
@@ -48,13 +49,17 @@ typedef struct s_game
 int		ft_get_pixel(t_img *img, int x, int y);
 void	ft_put_pixel(t_img *img, int x, int y, int color);
 void	ft_put_image(t_img *img, int x_offset, int y_offset, t_img *buffer);
-t_img	*ft_open_image(void	*mlx, char *name, int width, int height, int y);
+t_img	*ft_get_tile(t_img *src, int coor[2], int size[2], void *mlx);
+t_img	*ft_open_image(void	*mlx, char *name, int size[2], int y);
 
 /* * * * *
  * Game *
  * * * * */
 t_game	*ft_init_game(void);
-void	ft_mini_free(t_game *game);
+int		ft_init_background(t_game *game);
+int		ft_init_buffer(t_game *game);
+int		ft_init_platform(t_game *game);
+void	*ft_mini_free(t_game *game);
 
 /* * * * *
  * Input *
