@@ -6,7 +6,7 @@
 /*   By: yel-mens <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 16:36:36 by yel-mens          #+#    #+#             */
-/*   Updated: 2025/01/15 20:00:05 by yel-mens         ###   ########.fr       */
+/*   Updated: 2025/01/16 12:37:02 by yel-mens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,21 @@ typedef struct s_img
 	int		y;
 }				t_img;
 
+typedef struct s_player
+{
+	t_img	**idle;
+	t_img	***walk;
+	t_img	**run;
+	t_img	***jump;
+	t_img	**hurt;
+	t_img	**dead;
+	int		pv;
+	int		is_running;
+	int		is_jumping;
+	int		x;
+	int		y;
+}				t_player;
+
 typedef struct s_game
 {
 	void		*mlx;
@@ -38,10 +53,10 @@ typedef struct s_game
 	t_img		**backgrounds;
 	t_img		**platform;
 	t_img		*buffer;
+	t_player	*player;
 	int			width;
 	int			height;
 }				t_game;
-
 
 /* * * * * *
  * Images *
@@ -59,6 +74,7 @@ t_game	*ft_init_game(void);
 int		ft_init_background(t_game *game);
 int		ft_init_buffer(t_game *game);
 int		ft_init_platform(t_game *game);
+int		ft_init_player(t_game *game);
 void	*ft_mini_free(t_game *game);
 
 /* * * * *
