@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   struct.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yel-mens <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: yel-mens <yel-mens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/13 18:07:19 by yel-mens          #+#    #+#             */
-/*   Updated: 2025/01/17 11:29:19 by yel-mens         ###   ########.fr       */
+/*   Created: 2025/02/03 13:52:07 by yel-mens          #+#    #+#             */
+/*   Updated: 2025/02/10 18:15:51 by yel-mens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-static int	ft_init_mlx_win(t_game *game)
+static void	ft_init_mlx_win(t_game *game)
 {
 	void	*mlx;
 	void	*win;
@@ -21,7 +21,8 @@ static int	ft_init_mlx_win(t_game *game)
 	if (!mlx)
 	{
 		free(game);
-		return (0);
+		perror("mlx init");
+		exit(EXIT_FAILURE);
 	}
 	game->width = 800;
 	game->height = 600;
@@ -31,90 +32,42 @@ static int	ft_init_mlx_win(t_game *game)
 		free(game);
 		mlx_destroy_display(mlx);
 		free(mlx);
-		return (0);
+		perror("mlx window");
+		exit(EXIT_FAILURE);
 	}
 	game->mlx = mlx;
 	game->win = win;
+}
+
+static int	ft_init_buffer(t_game *game)
+{
+	game->buffer = malloc(sizeof(t_img));
+	if (!game->buffer)
+		ft_error("malloc buffer", game);
+	game->buffer->img = mlx_new_image(game->mlx, game->width, game->height);
+	if (!game->buffer->img)
+		ft_error("buffer image init", game);
+	game->buffer->data = mlx_get_data_addr(game->buffer->img,
+			&game->buffer->bpp, &game->buffer->size_line, &game->buffer->edn);
+	game->buffer->width = game->width;
+	game->buffer->height = game->height;
 	return (1);
 }
 
-static void	ft_destroy_array_images(void *mlx, t_img **array, int len)
-{
-	int	i;
-
-	i = 0;
-	while (i < len)
-	{
-		if (array[i])
-		{
-			if (array[i]->img)
-				mlx_destroy_image(mlx, array[i]->img);
-			free(array[i]);
-		}
-		i++;
-	}
-	free(array);
-}
-
-static void	ft_destroy_player(t_player *player, void *mlx)
-{
-	if (player->idle)
-		ft_destroy_array_images(mlx, player->idle, 12);
-	if (player->idle)
-		ft_destroy_array_images(mlx, player->run, 10);
-	if (player->hurt)
-		ft_destroy_array_images(mlx, player->hurt, 6);
-	if (player->dead)
-		ft_destroy_array_images(mlx, player->dead, 10);
-	if (player->walk[0])
-		ft_destroy_array_images(mlx, player->walk[0], 12);
-	if (player->walk[1])
-		ft_destroy_array_images(mlx, player->walk[1], 12);
-	if (player->jump[0])
-		ft_destroy_array_images(mlx, player->jump[0], 5);
-	if (player->jump[1])
-		ft_destroy_array_images(mlx, player->jump[1], 5);
-}
-
-void	*ft_mini_free(t_game *game)
-{
-	if (!game)
-		return (NULL);
-	if (game->backgrounds)
-		ft_destroy_array_images(game->mlx, game->backgrounds, 5);
-	if (game->platform)
-		ft_destroy_array_images(game->mlx, game->platform, 12);
-	if (game->buffer)
-	{
-		if (game->buffer->img)
-			mlx_destroy_image(game->mlx, game->buffer->img);
-		free(game->buffer);
-	}
-	if (game->player)
-		ft_destroy_player(game->player, game->mlx);
-	mlx_destroy_window(game->mlx, game->win);
-	mlx_destroy_display(game->mlx);
-	free(game->mlx);
-	free(game);
-	return (NULL);
-}
-
-t_game	*ft_init_game(void)
+t_game	*ft_init_game(char **argv)
 {
 	t_game	*game;
 
 	game = malloc(sizeof(t_game));
 	if (!game)
-		return (NULL);
-	if (!ft_init_mlx_win(game))
-		return (NULL);
-	if (!ft_init_background(game))
-		return (NULL);
-	if (!ft_init_buffer(game))
-		return (NULL);
-	if (!ft_init_platform(game))
-		return (NULL);
-	if (!ft_init_player(game))
-		return (NULL);
+	{
+		perror("game malloc");
+		exit(EXIT_FAILURE);
+	}
+	ft_init_mlx_win(game);
+	ft_init_buffer(game);
+	ft_parse(argv, game);
+	ft_init_background(game);
 	return (game);
 }
+

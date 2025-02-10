@@ -4,8 +4,9 @@ CC		=	cc
 CFLAGS	=	-Wall -Werror -Wextra -g
 CLIBS	=	-lmlx_Linux -lXext -lX11 -Lminilibx-linux
 
-SRC		=	so_long.c struct.c input.c image.c background.c tiles.c \
-			platform.c player.c
+SRC		=	so_long.c struct.c image.c input.c background.c parse.c error.c \
+			get_next_line.c get_next_line_utils.c
+
 OBJ		=	$(SRC:.c=.o)
 
 all		:	$(NAME)

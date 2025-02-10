@@ -3,33 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yel-mens <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: yel-mens <yel-mens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/13 16:43:22 by yel-mens          #+#    #+#             */
-/*   Updated: 2025/01/15 21:06:54 by yel-mens         ###   ########.fr       */
+/*   Created: 2025/02/03 14:04:07 by yel-mens          #+#    #+#             */
+/*   Updated: 2025/02/10 18:11:58 by yel-mens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-static void	ft_first_screen(t_game *game)
-{
-	ft_put_image(game->backgrounds[0], 0, 0, game->buffer);
-	ft_put_image(game->backgrounds[1], 0, 80, game->buffer);
-	ft_put_image(game->backgrounds[2], 0, 328, game->buffer);
-	ft_put_image(game->backgrounds[3], 0, 340, game->buffer);
-	ft_put_image(game->backgrounds[4], 0, 340, game->buffer);
-	mlx_put_image_to_window(game->mlx, game->win, game->buffer->img, 0, 0);
-}
-
-int	main(void)
+int	main(int argc, char **argv)
 {
 	t_game	*game;
 
-	game = ft_init_game();
+	if (argc != 2)
+		return (0);
+	game = ft_init_game(argv);
 	if (!game)
 		return (EXIT_FAILURE);
-	ft_first_screen(game);
 	mlx_hook(game->win, KeyPress, KeyPressMask, ft_handle_input, game);
 	mlx_hook(game->win, DestroyNotify, 0, mlx_loop_end, game->mlx);
 	mlx_loop(game->mlx);
