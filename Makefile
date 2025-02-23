@@ -4,7 +4,8 @@ CC		=	cc
 CFLAGS	=	-Wall -Werror -Wextra -g
 CLIBS	=	-lmlx_Linux -lXext -lX11 -Lminilibx-linux
 
-SRC		=	so_long.c struct.c image.c input.c background.c parse.c error.c \
+SRC		=	so_long.c struct.c image.c input.c map.c parse.c error.c \
+			translate.c player.c print.c \
 			get_next_line.c get_next_line_utils.c
 
 OBJ		=	$(SRC:.c=.o)
