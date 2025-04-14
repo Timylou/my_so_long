@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yel-mens <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: yel-mens <yel-mens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 16:36:36 by yel-mens          #+#    #+#             */
-/*   Updated: 2025/02/20 17:50:17 by yel-mens         ###   ########.fr       */
+/*   Updated: 2025/02/25 14:59:29 by yel-mens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,7 @@ void	ft_translate_map(t_map *map, t_game *game);
 void	ft_error(char *name, t_game *game);
 void    ft_print_steps(int steps);
 void    ft_win(t_game *game);
+void	ft_flood_fill(t_game *game);
 
 /* * * * * *
  * Player *

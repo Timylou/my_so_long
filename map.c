@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yel-mens <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: yel-mens <yel-mens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 14:23:16 by yel-mens          #+#    #+#             */
-/*   Updated: 2025/02/23 20:51:10 by yel-mens         ###   ########.fr       */
+/*   Updated: 2025/02/24 13:22:09 by yel-mens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,13 +44,13 @@ static void ft_display_player(t_player *player, t_game *game)
 	x = player->x;
 	y = player->y;
 	if (player->dir == UP)
-		ft_put_image(player->img_up, x * 64 - 20, y * 64 - 30, game->buffer);
+		ft_put_image(player->img_up, x * 64, y * 64, game->buffer);
 	else if (player->dir == DOWN)
-		ft_put_image(player->img_down, x * 64 - 20, y * 64 - 30, game->buffer);
+		ft_put_image(player->img_down, x * 64, y * 64, game->buffer);
 	else if (player->dir == RIGHT)
-		ft_put_image(player->img_right, x * 64 - 20, y * 64 - 30, game->buffer);
+		ft_put_image(player->img_right, x * 64, y * 64, game->buffer);
 	else if (player->dir == LEFT)
-		ft_put_image(player->img_left, x * 64 - 20, y * 64 - 30, game->buffer);
+		ft_put_image(player->img_left, x * 64, y * 64, game->buffer);
 }
 
 static void	ft_display_exit(t_game *game, int x, int y)

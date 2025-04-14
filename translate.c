@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   translate.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yel-mens <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: yel-mens <yel-mens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 16:07:32 by yel-mens          #+#    #+#             */
-/*   Updated: 2025/02/11 17:13:21 by yel-mens         ###   ########.fr       */
+/*   Updated: 2025/02/26 14:54:45 by yel-mens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static t_case	ft_switch(char tile, int *player, int *exit, t_game *game)
 		return (WALL);
 	if (tile == 'C')
 		return (COIN);
-	if (tile == 'E')
+	/* if (tile == 'E')
 	{
 		(*exit)++;
 		if (*exit > 1)
@@ -33,7 +33,12 @@ static t_case	ft_switch(char tile, int *player, int *exit, t_game *game)
 		if (*player > 1)
 			ft_error("too much players", game);
 		return (PLAYER);
-	}
+	} */
+	if (tile == 'P' || tile == 'E' || tile == 'C')
+		(*player)++;
+		if (*player > 1)
+			ft_error("too much players", game);
+		return (PLAYER);
 	ft_error("Invalid Map", game);
 	return (EMPTY);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yel-mens <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: yel-mens <yel-mens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 14:04:07 by yel-mens          #+#    #+#             */
-/*   Updated: 2025/02/23 20:38:41 by yel-mens         ###   ########.fr       */
+/*   Updated: 2025/02/25 14:34:58 by yel-mens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,10 @@ int	main(int argc, char **argv)
 	t_game	*game;
 
 	if (argc != 2)
-		return (0);
+	{
+		write(1, "Error\nYou must have 1 map !\n", 28);
+		return (EXIT_FAILURE);
+	}
 	game = ft_init_game(argv);
 	if (!game)
 		return (EXIT_FAILURE);

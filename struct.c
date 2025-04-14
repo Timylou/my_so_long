@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yel-mens <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: yel-mens <yel-mens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 13:52:07 by yel-mens          #+#    #+#             */
-/*   Updated: 2025/02/23 20:09:39 by yel-mens         ###   ########.fr       */
+/*   Updated: 2025/02/25 14:59:41 by yel-mens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,20 @@ static void	ft_init_variables(t_game *game)
 	}
 }
 
+static void	ft_bzero(void *str, size_t n)
+{
+	size_t			i;
+	unsigned char	*c_str;
+
+	c_str = (unsigned char *) str;
+	i = 0;
+	while (i < n)
+	{
+		c_str[i] = 0;
+		i++;
+	}
+}
+
 t_game	*ft_init_game(char **argv)
 {
 	t_game	*game;
@@ -93,11 +107,13 @@ t_game	*ft_init_game(char **argv)
 		perror("game malloc");
 		exit(EXIT_FAILURE);
 	}
+	ft_bzero(game, sizeof(t_game));
 	ft_init_mlx_win(game);
 	ft_init_buffer(game);
 	ft_parse(argv, game);
 	ft_init_game_images(game);
 	ft_init_player(game);
 	ft_init_variables(game);
+	ft_flood_fill(game);
 	return (game);
 }

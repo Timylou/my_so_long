@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yel-mens <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: yel-mens <yel-mens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/14 14:29:33 by yel-mens          #+#    #+#             */
-/*   Updated: 2025/02/23 20:36:14 by yel-mens         ###   ########.fr       */
+/*   Updated: 2025/02/24 13:18:00 by yel-mens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,6 @@ static void	ft_check_mouvement(t_player *player, t_map *map, t_game *game)
 	int	x;
 	int	y;
 	
-	game->steps += 1;
-	ft_print_steps(game->steps);
 	x = player->x;
 	y = player->y;
 	if (map->map[y][x] == EXIT && player->coins == game->coins)
@@ -68,6 +66,8 @@ void	ft_player_mouvement(t_player *player, t_game *game, t_direction dir)
 	{
 		player->x = x;
 		player->y = y;
+		game->steps += 1;
+		ft_print_steps(game->steps);
 	}
 	ft_check_mouvement(player, map, game);
 }
