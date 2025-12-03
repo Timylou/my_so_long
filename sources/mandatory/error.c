@@ -14,6 +14,12 @@
 
 static void	ft_free_imgs(t_game *game)
 {
+	int	i;
+
+	i = 0;
+	while (i < 5)
+		if (game->backgrounds[i++])
+			ft_free_image(game->backgrounds[i - 1], game);
 	if (game->frame)
 		ft_free_image(game->frame, game);
 }

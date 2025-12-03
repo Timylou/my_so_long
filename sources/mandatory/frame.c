@@ -1,26 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   frame.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yel-mens <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/03 20:19:03 by yel-mens          #+#    #+#             */
-/*   Updated: 2025/12/03 20:19:14 by yel-mens         ###   ########.fr       */
+/*   Created: 2025/12/03 22:20:59 by yel-mens          #+#    #+#             */
+/*   Updated: 2025/12/03 22:21:01 by yel-mens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int	main(void)
+void	ft_clear_frame(t_game *game)
 {
-	t_game	*game;
+	t_img	*cur_bg;
+	int		i;
 
-	game = ft_init_game();
-	mlx_hook(game->win, KeyPress, KeyPressMask, ft_handle_input, game);
-	mlx_hook(game->win, KeyRelease, KeyReleaseMask, ft_handle_release, game);
-	mlx_hook(game->win, DestroyNotify, 0, mlx_loop_end, game->mlx);
-	mlx_loop_hook(game->mlx, ft_loop, game);
-	mlx_loop(game->mlx);
-	ft_free_all(game);
+	i = 0;
+	while (i < 5)
+	{
+		cur_bg = game->backgrounds[i];
+		ft_put_image(cur_bg, cur_bg->x, cur_bg->y, game->frame);
+		i++;
+	}
 }

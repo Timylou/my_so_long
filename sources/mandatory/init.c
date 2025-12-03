@@ -20,8 +20,8 @@ static void	ft_init_mlx_win(t_game *game)
 	mlx = mlx_init();
 	if (!mlx)
 		ft_error("mlx init error\n", game);
-	game->w_width = 1600;
-	game->w_height = 900;
+	game->w_width = 800;
+	game->w_height = 600;
 	win = mlx_new_window(mlx, game->w_width, game->w_height, "miaou");
 	if (!win)
 		ft_error("mlx window init error\n", game);
@@ -38,8 +38,8 @@ static void	ft_init_player(t_game *game)
 		ft_error("Malloc Error\n", game);
 	player->x = -1;
 	player->y = -1;
-	player->key_up = 0;
-	player->key_down = 0;
+	player->jump = 0;
+	player->key_jump = 0;
 	player->key_left = 0;
 	player->key_right = 0;
 	game->player = player;
@@ -74,5 +74,6 @@ t_game	*ft_init_game(void)
 	ft_init_player(game);
 	ft_init_mlx_win(game);
 	ft_init_frame(game);
+	ft_init_background(game);
 	return (game);
 }

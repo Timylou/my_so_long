@@ -38,8 +38,9 @@ typedef struct t_player
 	float	x;
 	float	y;
 
-	int		key_up;
-	int		key_down;
+	int		jump;
+
+	int		key_jump;
 	int		key_left;
 	int		key_right;
 }				t_player;
@@ -51,12 +52,14 @@ typedef struct s_game
 
 	int			w_width;
 	int			w_height;
-	
+
 	char		**map;
 	int			m_width;
 	int			m_height;
-	
+
 	t_player	*player;
+
+	t_img		*backgrounds[5];
 	t_img		*frame;
 }				t_game;
 
@@ -80,7 +83,30 @@ void	ft_error(char *msg, t_game *game);
 
 int		ft_get_pixel(t_img *img, int x, int y);
 void	ft_put_pixel(t_img *img, int x, int y, int color);
+void	ft_put_image(t_img *img, int x_offset, int y_offset, t_img *buffer);
 t_img	*ft_open_image(void *mlx, char *name, int width, int height);
+
+/* * * * * * * * *
+ *  background *
+ * * * * * * * * */
+
+void	ft_init_background(t_game *game);
+void	ft_travelling_right(t_game *game);
+void	ft_travelling_left(t_game *game);
+
+/* * * * * *
+ *  input *
+ * * * * * */
+
+int		ft_handle_input(int keysym, t_game *game);
+int		ft_handle_release(int keysym, t_game *game);
+
+/* * * * * *
+ *  loop *
+ * * * * * */
+
+void	ft_clear_frame(t_game *game);
+int		ft_loop(t_game *game);
 
 /* * * * * *
  *  utils *
@@ -89,4 +115,4 @@ t_img	*ft_open_image(void *mlx, char *name, int width, int height);
 void	*ft_calloc(size_t nmemb, size_t size);
 void	ft_putstr_fd(char *s, int fd);
 
- #endif
+#endif

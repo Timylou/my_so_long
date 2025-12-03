@@ -9,7 +9,7 @@ DIR_OBJS		:=	objs
 DIR_LIBFT		:=	libraries/libft
 DIR_MLX			:=	libraries/minilibx-linux
 
-SRCS			:=	main.c init.c error.c image.c utils.c
+SRCS			:=	main.c init.c error.c image.c utils.c background.c input.c loop.c frame.c
 
 BONUS_SRCS		:=	main.c
 
