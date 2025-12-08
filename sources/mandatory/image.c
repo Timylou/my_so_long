@@ -33,9 +33,17 @@ int	ft_get_pixel(t_img *img, int x, int y)
 
 void	ft_put_pixel(t_img *img, int x, int y, int color)
 {
-	char	*dst;
+	char			*dst;
+	int				pos;
+	long int		size;
 
-	dst = img->data + ((y * img->size_line) + (x * (img->bpp / 8)));
+	size = img->size_line * img->height;
+	pos = ((y * img->size_line) + (x * (img->bpp / 8)));
+	if (pos < 0)
+		pos += size;
+	if (pos > size)
+		pos = pos % size;
+	dst = img->data + pos;
 	*(unsigned int *)dst = color;
 }
 
@@ -48,10 +56,10 @@ void	ft_put_image(t_img *img, int x_offset, int y_offset, t_img *buffer)
 	if (!buffer || !img)
 		return ;
 	y = 0;
-	while (y <= img->height)
+	while (y < img->height)
 	{
 		x = 0;
-		while (x <= img->width)
+		while (x < img->width)
 		{
 			color = ft_get_pixel(img, x, y);
 			if (color >= 0)

@@ -1,27 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   frame.c                                            :+:      :+:    :+:   */
+/*   player.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yel-mens <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/03 22:20:59 by yel-mens          #+#    #+#             */
-/*   Updated: 2025/12/03 22:21:01 by yel-mens         ###   ########.fr       */
+/*   Created: 2025/12/04 19:11:05 by yel-mens          #+#    #+#             */
+/*   Updated: 2025/12/04 19:11:08 by yel-mens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	ft_clear_frame(t_game *game)
+void	ft_free_player(t_game *game)
 {
-	t_img	*cur_bg;
-	int		i;
+	if (!game->player)
+		return ;
+	free(game->player);
+}
 
-	i = 0;
-	while (i < 3)
-	{
-		cur_bg = game->backgrounds[i];
-		ft_put_image(cur_bg, cur_bg->x, cur_bg->y, game->frame);
-		i++;
-	}
+void	ft_set_pos_player(t_game *game, int x, int y)
+{
+	game->player->x = x;
+	game->player->y = y;
 }

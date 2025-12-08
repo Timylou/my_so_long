@@ -29,8 +29,8 @@ typedef struct s_img
 	int		edn;
 	int		width;
 	int		height;
-	int		x;
-	int		y;
+	long	x;
+	long	y;
 }				t_img;
 
 typedef struct t_player
@@ -59,7 +59,10 @@ typedef struct s_game
 
 	t_player	*player;
 
-	t_img		*backgrounds[5];
+	int			coins;
+
+	t_img		*backgrounds[3];
+	t_img		*platforms[6];
 	t_img		*frame;
 }				t_game;
 
@@ -75,6 +78,7 @@ t_game	*ft_init_game(void);
 
 void	ft_free_all(t_game *game);
 void	ft_free_image(t_img *img, t_game *game);
+void	ft_free_player(t_game *game);
 void	ft_error(char *msg, t_game *game);
 
 /* * * * * *
@@ -101,6 +105,11 @@ void	ft_travelling_left(t_game *game);
 int		ft_handle_input(int keysym, t_game *game);
 int		ft_handle_release(int keysym, t_game *game);
 
+/* * * * * * *
+ *  player *
+ * * * * * * */
+void	ft_set_pos_player(t_game *game, int x, int y);
+
 /* * * * * *
  *  loop *
  * * * * * */
@@ -109,10 +118,24 @@ void	ft_clear_frame(t_game *game);
 int		ft_loop(t_game *game);
 
 /* * * * * *
+ *  parse *
+ * * * * * */
+
+void	ft_parse(t_game *game, char *filemap);
+
+/* * * * * * * *
+ *  platform *
+ * * * * * * * */
+
+void	ft_init_platforms(t_game *game);
+t_img	*ft_get_tile(t_img *tileset, int tilesize, int tilenum, t_game *game);
+
+/* * * * * *
  *  utils *
  * * * * * */
 
 void	*ft_calloc(size_t nmemb, size_t size);
 void	ft_putstr_fd(char *s, int fd);
+int		ft_strlen(char *str);
 
 #endif

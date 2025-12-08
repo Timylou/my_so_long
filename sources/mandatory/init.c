@@ -20,8 +20,8 @@ static void	ft_init_mlx_win(t_game *game)
 	mlx = mlx_init();
 	if (!mlx)
 		ft_error("mlx init error\n", game);
-	game->w_width = 800;
-	game->w_height = 600;
+	game->w_width = 1920;
+	game->w_height = 399;
 	win = mlx_new_window(mlx, game->w_width, game->w_height, "miaou");
 	if (!win)
 		ft_error("mlx window init error\n", game);
@@ -75,5 +75,6 @@ t_game	*ft_init_game(void)
 	ft_init_mlx_win(game);
 	ft_init_frame(game);
 	ft_init_background(game);
+	ft_init_platforms(game);
 	return (game);
 }

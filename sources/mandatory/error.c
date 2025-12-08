@@ -17,9 +17,15 @@ static void	ft_free_imgs(t_game *game)
 	int	i;
 
 	i = 0;
-	while (i < 5)
+	while (i < 3)
 		if (game->backgrounds[i++])
 			ft_free_image(game->backgrounds[i - 1], game);
+	i = 0;
+	while (i < 6)
+	{
+		if (game->platforms[i++])
+			ft_free_image(game->platforms[i - 1], game);
+	}
 	if (game->frame)
 		ft_free_image(game->frame, game);
 }
@@ -35,11 +41,20 @@ static void	ft_free_mlx_win(t_game *game)
 	}
 }
 
-static void	ft_free_player(t_game *game)
+static void	ft_free_map(t_game *game)
 {
-	if (!game->player)
+	int	i;
+
+	if (!game->map)
 		return ;
-	free(game->player);
+	i = 0;
+	while (i < game->m_height)
+	{
+		if (game->map[i])
+			free(game->map[i]);
+		i++;
+	}
+	free(game->map);
 }
 
 void	ft_free_all(t_game *game)
@@ -48,6 +63,7 @@ void	ft_free_all(t_game *game)
 		return ;
 	ft_free_player(game);
 	ft_free_imgs(game);
+	ft_free_map(game);
 	ft_free_mlx_win(game);
 	free(game);
 }

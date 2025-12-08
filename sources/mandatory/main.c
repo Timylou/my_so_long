@@ -12,11 +12,14 @@
 
 #include "so_long.h"
 
-int	main(void)
+int	main(int argc, char **argv)
 {
 	t_game	*game;
 
+	if (argc != 2)
+		return (EXIT_FAILURE);
 	game = ft_init_game();
+	ft_parse(game, argv[1]);
 	mlx_hook(game->win, KeyPress, KeyPressMask, ft_handle_input, game);
 	mlx_hook(game->win, KeyRelease, KeyReleaseMask, ft_handle_release, game);
 	mlx_hook(game->win, DestroyNotify, 0, mlx_loop_end, game->mlx);
