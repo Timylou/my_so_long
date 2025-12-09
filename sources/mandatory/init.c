@@ -40,6 +40,7 @@ static void	ft_init_player(t_game *game)
 	player->y = -1;
 	player->jump = 0;
 	player->key_jump = 0;
+	player->key_run = 0;
 	player->key_left = 0;
 	player->key_right = 0;
 	game->player = player;
