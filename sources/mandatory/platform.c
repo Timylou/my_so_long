@@ -22,4 +22,12 @@ void	ft_init_platforms(t_game *game)
 	game->platforms[0] = ft_get_tile(tileset, 64, 5, game);
 	game->platforms[1] = ft_get_tile(tileset, 64, 6, game);
 	ft_free_image(tileset, game);
+	tileset = ft_open_image(game->mlx, "textures/portal.xpm", 96, 64);
+	game->exit[0] = ft_get_tile(tileset, 128, 0, game);
+	game->exit[1] = ft_get_tile(tileset, 128, 1, game);
+	game->exit[2] = ft_get_tile(tileset, 128, 2, game);
+	game->exit[3] = ft_get_tile(tileset, 128, 3, game);
+	game->exit[4] = ft_get_tile(tileset, 128, 4, game);
+	game->exit[5] = ft_get_tile(tileset, 128, 5, game);
+	ft_free_image(tileset, game);
 }

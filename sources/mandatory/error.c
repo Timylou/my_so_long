@@ -17,16 +17,16 @@ static void	ft_free_imgs(t_game *game)
 	int	i;
 
 	i = 0;
-	while (i < 6)
+	while (i < 8)
 	{
-		if (i < 2 && game->player->idle[i])
+		if (i < 4 && game->player->idle[i])
 			ft_free_image(game->player->idle[i], game);
 		if (i < 3 && game->backgrounds[i])
 			ft_free_image(game->backgrounds[i], game);
-		if (i < 4)
-			ft_free_image(game->player->walk[i], game);
-		if (game->platforms[i])
+		if (i < 6 && game->platforms[i])
 			ft_free_image(game->platforms[i], game);
+		if (i < 8)
+			ft_free_image(game->player->walk[i], game);
 		i++;
 	}
 	if (game->frame)

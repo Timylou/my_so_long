@@ -30,16 +30,14 @@ int	ft_handle_input(int keysym, t_game *game)
 	{
 		if (!game->player->key_right)
 			game->player->key_left = 1;
-		ft_travelling_right(game); // a deplacer
-		game->cam_x -= 5.5; // a deplacer
 	}
 	else if (keysym == XK_d || keysym == XK_Right)
 	{
 		if (!game->player->key_left)
 			game->player->key_right = 1;
-		ft_travelling_left(game); // a deplacer
-		game->cam_x += 5.5; // a deplacer
 	}
+	else if (keysym == XK_Shift_L)
+		game->player->key_run = 1;
 	return (1);
 }
 
@@ -51,5 +49,7 @@ int	ft_handle_release(int keysym, t_game *game)
 		game->player->key_left = 0;
 	else if (keysym == XK_d || keysym == XK_Right)
 		game->player->key_right = 0;
+	else if (keysym == XK_Shift_L)
+		game->player->key_run = 0;
 	return (1);
 }

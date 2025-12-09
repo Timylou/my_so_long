@@ -1,26 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   loop.c                                             :+:      :+:    :+:   */
+/*   time.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yel-mens <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/03 22:16:06 by yel-mens          #+#    #+#             */
-/*   Updated: 2025/12/03 22:16:06 by yel-mens         ###   ########.fr       */
+/*   Created: 2025/12/09 19:57:04 by yel-mens          #+#    #+#             */
+/*   Updated: 2025/12/09 19:57:05 by yel-mens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int	ft_loop(t_game *game)
+long	get_time_ms(void)
 {
-	long	time;
+	struct timeval	tv;
 
-	time = get_time_ms() % 1000;
-	ft_move_player(game);
-	ft_clear_frame(game);
-	ft_draw_platforms(game);
-	ft_draw_player(game, time);
-	mlx_put_image_to_window(game->mlx, game->win, game->frame->img, 0, 0);
-	return (1);
+	gettimeofday(&tv, NULL);
+	return ((long)(tv.tv_sec * 1000L + tv.tv_usec / 1000));
 }
