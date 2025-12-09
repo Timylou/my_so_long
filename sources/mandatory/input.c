@@ -20,18 +20,25 @@ int	ft_handle_input(int keysym, t_game *game)
 		return (1);
 	}
 	if (keysym == XK_w || keysym == XK_Up || keysym == XK_space)
+	{
 		game->player->key_jump = 1;
+		game->cam_y -= 5.5;
+	}
+	else if (keysym == XK_Down)
+		game->cam_y += 5.5;
 	else if (keysym == XK_a || keysym == XK_Left)
 	{
 		if (!game->player->key_right)
 			game->player->key_left = 1;
 		ft_travelling_right(game); // a deplacer
+		game->cam_x -= 5.5; // a deplacer
 	}
 	else if (keysym == XK_d || keysym == XK_Right)
 	{
 		if (!game->player->key_left)
 			game->player->key_right = 1;
 		ft_travelling_left(game); // a deplacer
+		game->cam_x += 5.5; // a deplacer
 	}
 	return (1);
 }

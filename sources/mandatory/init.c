@@ -43,6 +43,7 @@ static void	ft_init_player(t_game *game)
 	player->key_left = 0;
 	player->key_right = 0;
 	game->player = player;
+	ft_init_player_images(player, game);
 }
 
 static void	ft_init_frame(t_game *game)
@@ -71,8 +72,8 @@ t_game	*ft_init_game(void)
 	game = ft_calloc(1, sizeof(t_game));
 	if (!game)
 		ft_error("game malloc error\n", game);
-	ft_init_player(game);
 	ft_init_mlx_win(game);
+	ft_init_player(game);
 	ft_init_frame(game);
 	ft_init_background(game);
 	ft_init_platforms(game);

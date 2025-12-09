@@ -17,14 +17,17 @@ static void	ft_free_imgs(t_game *game)
 	int	i;
 
 	i = 0;
-	while (i < 3)
-		if (game->backgrounds[i++])
-			ft_free_image(game->backgrounds[i - 1], game);
-	i = 0;
 	while (i < 6)
 	{
-		if (game->platforms[i++])
-			ft_free_image(game->platforms[i - 1], game);
+		if (i < 2 && game->player->idle[i])
+			ft_free_image(game->player->idle[i], game);
+		if (i < 3 && game->backgrounds[i])
+			ft_free_image(game->backgrounds[i], game);
+		if (i < 4)
+			ft_free_image(game->player->walk[i], game);
+		if (game->platforms[i])
+			ft_free_image(game->platforms[i], game);
+		i++;
 	}
 	if (game->frame)
 		ft_free_image(game->frame, game);
@@ -61,8 +64,8 @@ void	ft_free_all(t_game *game)
 {
 	if (!game)
 		return ;
-	ft_free_player(game);
 	ft_free_imgs(game);
+	ft_free_player(game);
 	ft_free_map(game);
 	ft_free_mlx_win(game);
 	free(game);

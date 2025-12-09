@@ -16,6 +16,7 @@ int	ft_loop(t_game *game)
 {
 	//ft_move_player(game->player, game);
 	ft_clear_frame(game);
+	ft_draw_in_camera(game);
 	mlx_put_image_to_window(game->mlx, game->win, game->frame->img, 0, 0);
 	return (1);
 }

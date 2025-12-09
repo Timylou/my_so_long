@@ -43,6 +43,9 @@ typedef struct t_player
 	int		key_jump;
 	int		key_left;
 	int		key_right;
+
+	t_img	*idle[2];
+	t_img	*walk[4];
 }				t_player;
 
 typedef struct s_game
@@ -58,6 +61,9 @@ typedef struct s_game
 	int			m_height;
 
 	t_player	*player;
+
+	float		cam_x;
+	float		cam_y;
 
 	int			coins;
 
@@ -108,6 +114,7 @@ int		ft_handle_release(int keysym, t_game *game);
 /* * * * * * *
  *  player *
  * * * * * * */
+void	ft_init_player_images(t_player *player, t_game *game);
 void	ft_set_pos_player(t_game *game, int x, int y);
 
 /* * * * * *
@@ -115,6 +122,7 @@ void	ft_set_pos_player(t_game *game, int x, int y);
  * * * * * */
 
 void	ft_clear_frame(t_game *game);
+void	ft_draw_in_camera(t_game *game);
 int		ft_loop(t_game *game);
 
 /* * * * * *
