@@ -12,7 +12,7 @@
 
 #include "so_long.h"
 
-void	ft_init_platforms(t_game *game)
+static void	ft_open_platforms(t_game *game)
 {
 	t_img	*tileset;
 
@@ -20,14 +20,38 @@ void	ft_init_platforms(t_game *game)
 	if (!tileset)
 		ft_error("tileset image platform init\n", game);
 	game->platforms[0] = ft_get_tile(tileset, 64, 5, game);
-	game->platforms[1] = ft_get_tile(tileset, 64, 6, game);
+	game->platforms[1] = ft_get_tile(tileset, 128, 70, game);
+	game->platforms[2] = ft_get_tile(tileset, 128, 60, game);
+	game->platforms[3] = ft_get_tile(tileset, 128, 50, game);
+	game->platforms[4] = flip_xpm_horizontally(game->platforms[1], game);
+	game->platforms[5] = flip_xpm_horizontally(game->platforms[2], game);
+	game->platforms[6] = flip_xpm_horizontally(game->platforms[3], game);
 	ft_free_image(tileset, game);
+}
+
+void	ft_init_platforms(t_game *game)
+{
+	t_img	*tileset;
+	int		i;
+
+	ft_open_platforms(game);
 	tileset = ft_open_image(game->mlx, "textures/portal.xpm", 96, 64);
-	game->exit[0] = ft_get_tile(tileset, 128, 0, game);
-	game->exit[1] = ft_get_tile(tileset, 128, 1, game);
-	game->exit[2] = ft_get_tile(tileset, 128, 2, game);
-	game->exit[3] = ft_get_tile(tileset, 128, 3, game);
-	game->exit[4] = ft_get_tile(tileset, 128, 4, game);
-	game->exit[5] = ft_get_tile(tileset, 128, 5, game);
+	if (!tileset)
+		ft_error("tileset portal init\n", game);
+	i = -1;
+	while (++i < 6)
+		game->exit[i] = ft_get_tile(tileset, 128, i, game);
+	ft_free_image(tileset, game);
+	tileset = ft_open_image(game->mlx, "textures/apple.xpm", 128, 32);
+	if (!tileset)
+		ft_error("tileset apple.xpm\n", game);
+	i = -1;
+	while (++i < 4)
+		game->apple[i] = ft_get_tile(tileset, 64, i, game);
+	ft_free_image(tileset, game);
+	tileset = ft_open_image(game->mlx, "textures/star.xpm", 320, 64);
+	i = -1;
+	while (++i < 4)
+		game->star[i] = ft_get_tile(tileset, 64, i, game);
 	ft_free_image(tileset, game);
 }

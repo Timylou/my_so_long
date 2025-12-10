@@ -12,6 +12,32 @@
 
 #include "so_long.h"
 
+static void	ft_switch_camera(char block, int x, int y, t_game *game)
+{
+	if (block == 'A')
+		ft_star_animation(game, x, y);
+	x = x * 64 - game->cam_x;
+	y = y * 64 - game->cam_y;
+	if (block == '1')
+		ft_put_image_clean(game->platforms[0], x, y, game->frame);
+	else if (block == '4')
+		ft_put_image_clean(game->platforms[1], x, y, game->frame);
+	else if (block == '3')
+		ft_put_image_clean(game->platforms[2], x, y, game->frame);
+	else if (block == '2')
+		ft_put_image_clean(game->platforms[3], x - 64, y, game->frame);	
+	else if (block == '7')
+		ft_put_image_clean(game->platforms[4], x - 64, y, game->frame);	
+	else if (block == '6')
+		ft_put_image_clean(game->platforms[5], x - 64, y, game->frame);	
+	else if (block == '5')
+		ft_put_image_clean(game->platforms[6], x - 64, y, game->frame);	
+	else if (!game->coins && block == 'E')
+		ft_exit_animation(game, x, y);
+	else if (block == 'C')
+		ft_apple_animation(game, x, y);
+}
+
 static void	ft_loop_camera(t_game *game, int end_tile_x, int end_tile_y, int y)
 {
 	int	start_x;
@@ -23,11 +49,8 @@ static void	ft_loop_camera(t_game *game, int end_tile_x, int end_tile_y, int y)
 		x = start_x;
 		while (x <= end_tile_x)
 		{
-			if (game->map[y][x] == '1')
-				ft_put_image_clean(game->platforms[0], x * 64 - game->cam_x,
-					y * 64 - game->cam_y, game->frame);
-			if (game->map[y][x] == 'E')
-				ft_exit_animation(game, x * 64 - game->cam_x, y * 64 - game->cam_y);
+			if (0 <= y && y <= game->m_height && 0 <= x && x <= game->m_width)
+				ft_switch_camera(game->map[y][x], x, y, game);
 			x++;
 		}
 		y++;

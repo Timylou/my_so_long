@@ -81,3 +81,18 @@ void	ft_exit_animation(t_game *game, int x, int y)
 	else
 		ft_put_image_clean(game->exit[5], x, y - 60, game->frame);
 }
+
+void	ft_apple_animation(t_game *game, int x, int y)
+{
+	long	time;
+
+	time = get_time_ms() % 1000;
+	if (time < 250)
+		ft_put_image_clean(game->apple[0], x, y, game->frame);
+	else if (time < 500)
+		ft_put_image_clean(game->apple[1], x, y, game->frame);
+	else if (time < 750)
+		ft_put_image_clean(game->apple[2], x, y, game->frame);
+	else
+		ft_put_image_clean(game->apple[3], x, y, game->frame);
+}

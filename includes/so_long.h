@@ -71,8 +71,10 @@ typedef struct s_game
 	int			coins;
 
 	t_img		*backgrounds[3];
-	t_img		*platforms[6];
+	t_img		*platforms[7];
 	t_img		*exit[6];
+	t_img		*apple[4];
+	t_img		*star[4];
 	t_img		*frame;
 }				t_game;
 
@@ -88,7 +90,7 @@ t_game	*ft_init_game(void);
 
 void	ft_free_all(t_game *game);
 void	ft_free_image(t_img *img, t_game *game);
-void	ft_free_player(t_game *game);
+void	ft_free_mlx_win(t_game *game);
 void	ft_error(char *msg, t_game *game);
 
 /* * * * * *
@@ -125,10 +127,17 @@ void	ft_init_player_images(t_player *player, t_game *game);
 void	ft_set_pos_player(t_game *game, int x, int y);
 void	ft_move_player(t_game *game);
 void	ft_move_camera(t_game *game, float speed);
+
+/* * * * * * * * *
+ *  animation *
+ * * * * * * * * */
+
 void	ft_walk_animation(t_game *game, int look_left, long time);
 void	ft_idle_animation(t_game *game, int look_left, long time);
 void	ft_run_animation(t_game *game, int look_left, long time);
 void	ft_exit_animation(t_game *game, int x, int y);
+void	ft_apple_animation(t_game *game, int x, int y);
+void	ft_star_animation(t_game *game, int x, int y);
 
 /* * * * * *
  *  loop *
@@ -144,6 +153,7 @@ int		ft_loop(t_game *game);
  * * * * * */
 
 void	ft_parse(t_game *game, char *filemap);
+void	ft_change_map(t_game *game);
 
 /* * * * * * * *
  *  platform *

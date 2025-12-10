@@ -12,12 +12,7 @@
 
 #include "so_long.h"
 
-void	ft_free_player(t_game *game)
-{
-	if (!game->player)
-		return ;
-	free(game->player);
-}
+
 
 void	ft_init_player_images(t_player *player, t_game *game)
 {
@@ -63,6 +58,11 @@ void	ft_set_pos_player(t_game *game, int x, int y)
 		game->cam_y = game->w_height - 64;
 }
 
+static int	ft_check_mouvement(char block)
+{
+	return (!('0' < block && block < '8'));
+}
+
 void	ft_move_player(t_game *game)
 {
 	float	new_x;
@@ -80,10 +80,15 @@ void	ft_move_player(t_game *game)
 		new_x = game->player->x - speed;
 	if (game->player->key_right)
 		new_x = game->player->x + speed;
-	if (game->map[(int)new_y][(int)new_x] != '1')
+	if (ft_check_mouvement(game->map[(int)new_y][(int)(new_x + 0.5)]))
 	{
 		game->player->x = new_x;
 		ft_move_camera(game, speed);
+		if (game->map[(int)new_y][(int)(new_x)] == 'C')
+		{
+			game->map[(int)new_y][(int)new_x] = 'A';
+			game->coins -= 1;
+		}
 	}
 }
 

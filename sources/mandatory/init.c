@@ -12,6 +12,17 @@
 
 #include "so_long.h"
 
+void	ft_free_mlx_win(t_game *game)
+{
+	if (game->win)
+		mlx_destroy_window(game->mlx, game->win);
+	if (game->mlx)
+	{
+		mlx_destroy_display(game->mlx);
+		free(game->mlx);
+	}
+}
+
 static void	ft_init_mlx_win(t_game *game)
 {
 	void	*mlx;

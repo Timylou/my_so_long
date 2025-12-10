@@ -19,14 +19,18 @@ static void	ft_free_imgs(t_game *game)
 	i = 0;
 	while (i < 16)
 	{
-		if (i < 4 && game->player->idle[i])
-			ft_free_image(game->player->idle[i], game);
 		if (i < 3 && game->backgrounds[i])
 			ft_free_image(game->backgrounds[i], game);
-		if (i < 6 && game->platforms[i])
-			ft_free_image(game->platforms[i], game);
+		if (i < 4 && game->player->idle[i])
+			ft_free_image(game->player->idle[i], game);
+		if (i < 4 && game->star[i])
+			ft_free_image(game->star[i], game);
+		if (i < 4 && game->apple[i])
+			ft_free_image(game->apple[i], game);
 		if (i < 6 && game->exit[i])
 			ft_free_image(game->exit[i], game);
+		if (i < 7 && game->platforms[i])
+			ft_free_image(game->platforms[i], game);
 		if (i < 8 && game->player->walk[i])
 			ft_free_image(game->player->walk[i], game);
 		if (i < 16 && game->player->run[i])
@@ -37,15 +41,11 @@ static void	ft_free_imgs(t_game *game)
 		ft_free_image(game->frame, game);
 }
 
-static void	ft_free_mlx_win(t_game *game)
+static void	ft_free_player(t_game *game)
 {
-	if (game->win)
-		mlx_destroy_window(game->mlx, game->win);
-	if (game->mlx)
-	{
-		mlx_destroy_display(game->mlx);
-		free(game->mlx);
-	}
+	if (!game->player)
+		return ;
+	free(game->player);
 }
 
 static void	ft_free_map(t_game *game)

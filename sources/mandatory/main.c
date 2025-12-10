@@ -20,6 +20,7 @@ int	main(int argc, char **argv)
 		return (EXIT_FAILURE);
 	game = ft_init_game();
 	ft_parse(game, argv[1]);
+	ft_change_map(game);
 	mlx_hook(game->win, KeyPress, KeyPressMask, ft_handle_input, game);
 	mlx_hook(game->win, KeyRelease, KeyReleaseMask, ft_handle_release, game);
 	mlx_hook(game->win, DestroyNotify, 0, mlx_loop_end, game->mlx);
