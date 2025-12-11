@@ -19,7 +19,7 @@ static void	ft_switch_camera(char block, int x, int y, t_game *game)
 	x = x * 64 - game->cam_x;
 	y = y * 64 - game->cam_y;
 	if (block == '1')
-		ft_put_image_clean(game->platforms[0], x, y, game->frame);
+		ft_put_image_clean(game->platforms[0], x + 32, y, game->frame);
 	else if (block == '4')
 		ft_put_image_clean(game->platforms[1], x, y, game->frame);
 	else if (block == '3')
@@ -44,6 +44,8 @@ static void	ft_loop_camera(t_game *game, int end_tile_x, int end_tile_y, int y)
 	int	x;
 
 	start_x = game->cam_x / 64;
+	if (start_x - 1 > 0)
+		start_x -= 1;
 	while (y <= end_tile_y)
 	{
 		x = start_x;
@@ -66,26 +68,34 @@ void	ft_draw_platforms(t_game *game)
 	y = game->cam_y / 64 - 1;
 	end_tile_x = (game->cam_x + game->w_width) / 64;
 	end_tile_y = (game->cam_y + game->w_height) / 64;
-	if (end_tile_x >= game->m_width)
+	if (end_tile_x > game->m_width)
 		end_tile_x = game->m_width - 1;
-	if (end_tile_y >= game->m_height)
+	if (end_tile_y > game->m_height)
 		end_tile_y = game->m_height - 1;
 	ft_loop_camera(game, end_tile_x, end_tile_y, y);
 }
 
 void	ft_move_camera(t_game *game, float speed)
 {
-	if (game->player->key_right)
-		ft_travelling_left(game);
-	if (game->player->key_left)
-		ft_travelling_right(game);
-	if (game->player->key_right && game->player->x > 10
-		&& game->player->x < (float)(game->m_width - 20))
-		game->cam_x += speed * 64;
-	if (game->player->key_left && game->player->x < game->m_width - 20)
-		game->cam_x -= speed * 64;
-	if (game->player->x < 10)
-		game->cam_x = 0;
-	if (game->player->x > game->m_width - 20)
-		game->cam_x = (game->m_width - 30) * 64;
+	if (speed)
+	{
+		if (game->player->key_right)
+			ft_travelling_left(game);
+		if (game->player->key_left)
+			ft_travelling_right(game);
+		if (game->player->key_right && game->player->x > 10
+			&& game->player->x < (float)(game->m_width - 20))
+			game->cam_x += speed * 64;
+		if (game->player->key_left && game->player->x < game->m_width - 20)
+			game->cam_x -= speed * 64;
+		if (game->player->x < 10)
+			game->cam_x = 0;
+		if (game->player->x > game->m_width - 20)
+			game->cam_x = (game->m_width - 30) * 64;
+	}
+	game->cam_y = (game->player->y - 3) * 64;
+	if (game->player->y < 7)
+		game->cam_y = 0;
+	if (game->player->y > game->m_height - 4)
+		game->cam_y = (game->m_height - 7) * 64;
 }

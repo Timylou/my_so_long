@@ -11,7 +11,8 @@ DIR_GNL			:=	libraries/get_next_line
 DIR_MLX			:=	libraries/minilibx-linux
 
 SRCS			:=	main.c init.c error.c image.c utils.c background.c input.c loop.c frame.c parse.c player.c \
-					tile.c platform.c camera.c image_clean.c flip.c time.c animation.c map.c independant_animation.c
+					tile.c platform.c camera.c image_clean.c flip.c time.c animation.c map.c independant_animation.c \
+					jump.c
 BONUS_SRCS		:=	main.c
 
 OBJS			:=	$(SRCS:.c=.o)

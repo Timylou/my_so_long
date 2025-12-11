@@ -19,11 +19,8 @@ int	ft_handle_input(int keysym, t_game *game)
 		mlx_loop_end(game->mlx);
 		return (1);
 	}
-	else if (keysym == XK_w || keysym == XK_Up || keysym == XK_space)
-	{
+	else if (keysym == XK_space)
 		game->player->key_jump = 1;
-		game->cam_y -= 5.5;
-	}
 	else if (keysym == XK_Down)
 		game->cam_y += 5.5;
 	else if (keysym == XK_a || keysym == XK_d)
@@ -42,9 +39,7 @@ int	ft_handle_input(int keysym, t_game *game)
 
 int	ft_handle_release(int keysym, t_game *game)
 {
-	if (keysym == XK_w || keysym == XK_Up || keysym == XK_space)
-		game->player->key_jump = 0;
-	else if (keysym == XK_a || keysym == XK_Left)
+	if (keysym == XK_a || keysym == XK_Left)
 		game->player->key_left = 0;
 	else if (keysym == XK_d || keysym == XK_Right)
 		game->player->key_right = 0;

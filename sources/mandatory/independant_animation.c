@@ -17,13 +17,13 @@ static void	ft_animate_star(t_game *game, long time, int x, int y)
 	x = x * 64 - game->cam_x;
 	y = y * 64 - game->cam_y;
 	if (time > 150)
-		ft_put_image_clean(game->star[0], x, y, game->frame);
+		ft_put_image_clean(game->star[0], x + 32, y, game->frame);
 	else if (time > 100)
-		ft_put_image_clean(game->star[1], x, y, game->frame);
+		ft_put_image_clean(game->star[1], x + 32, y, game->frame);
 	else if (time > 50)
-		ft_put_image_clean(game->star[2], x, y, game->frame);
+		ft_put_image_clean(game->star[2], x + 32, y, game->frame);
 	else
-		ft_put_image_clean(game->star[3], x, y, game->frame);
+		ft_put_image_clean(game->star[3], x + 32, y, game->frame);
 }
 
 void	ft_star_animation(t_game *game, int x, int y)
@@ -37,6 +37,7 @@ void	ft_star_animation(t_game *game, int x, int y)
 	if (!(x == old_x && y == old_y))
 	{
 		timer = time + 200;
+		game->map[old_y][old_x] = '0';
 		old_x = x;
 		old_y = y;
 	}

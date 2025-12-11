@@ -49,7 +49,7 @@ static void	ft_init_player(t_game *game)
 		ft_error("Malloc Error\n", game);
 	player->x = -1;
 	player->y = -1;
-	player->jump = 0;
+	player->velocity = VELOCITY;
 	player->key_jump = 0;
 	player->key_run = 0;
 	player->key_left = 0;

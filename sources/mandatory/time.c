@@ -12,6 +12,22 @@
 
 #include "so_long.h"
 
+float	get_delta_time(void)
+{
+	static long last = 0;
+	long now = get_time_ms();
+	float dt;
+
+	if (last == 0)
+	{
+		last = now;
+		return 0.0f;
+	}
+	dt = (now - last) / 1000.0f;
+	last = now;
+	return (dt);
+}
+
 long	get_time_ms(void)
 {
 	struct timeval	tv;

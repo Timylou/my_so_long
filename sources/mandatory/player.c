@@ -52,40 +52,51 @@ void	ft_set_pos_player(t_game *game, int x, int y)
 		game->cam_x = 0;
 	if (game->player->x > game->m_width - 20)
 		game->cam_x = (game->m_width - 30) * 64;
+	if (game->map[y + 1][x] != '1')
+	{
+		game->player->key_jump = 0;
+		game->player->velocity = 0;
+	}
 }
 
-static int	ft_check_mouvement(char block)
-{
-	return (!('0' < block && block < '8'));
-}
-
-void	ft_move_player(t_game *game)
+void	ft_move_player(t_game *game, float dt)
 {
 	float	new_x;
 	float	new_y;
 	float	speed;
 
-	speed = 0.05;
+	speed = 0;
+	if (game->player->key_left || game->player->key_right)
+		speed = 0.05;
 	if (game->player->key_run)
 		speed = 0.1;
 	new_x = 0;
-	new_y = game->player->y;
-	if (!game->player->key_left && !game->player->key_right)
+	new_y = ft_jump(game, dt);
+	game->player->y = new_y;
+	if (!game->player->key_left && !game->player->key_right && !game->player->key_jump)
 		return ;
 	if (game->player->key_left)
 		new_x = game->player->x - speed;
 	if (game->player->key_right)
 		new_x = game->player->x + speed;
-	if (ft_check_mouvement(game->map[(int)new_y][(int)(new_x + 0.5)]))
+	if (ft_check_mouvement(game->map[(int)new_y][(int)(new_x)]))
 	{
 		game->player->x = new_x;
-		ft_move_camera(game, speed);
 		if (game->map[(int)new_y][(int)(new_x)] == 'C')
 		{
 			game->map[(int)new_y][(int)new_x] = 'A';
 			game->coins -= 1;
 		}
+		if (!game->player->key_jump && game->map[(int)(new_y + 1)][(int)new_x] != '1')
+		{
+			game->player->velocity = -0.1;
+			game->player->key_jump = 1;
+			ft_jump(game, dt);
+		}
 	}
+	else
+		speed = 0;
+	ft_move_camera(game, speed);
 }
 
 void	ft_draw_player(t_game *game, long time)

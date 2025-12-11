@@ -88,11 +88,11 @@ void	ft_apple_animation(t_game *game, int x, int y)
 
 	time = get_time_ms() % 1000;
 	if (time < 250)
-		ft_put_image_clean(game->apple[0], x, y, game->frame);
+		ft_put_image_clean(game->apple[0], x + 32, y, game->frame);
 	else if (time < 500)
-		ft_put_image_clean(game->apple[1], x, y, game->frame);
+		ft_put_image_clean(game->apple[1], x + 32, y, game->frame);
 	else if (time < 750)
-		ft_put_image_clean(game->apple[2], x, y, game->frame);
+		ft_put_image_clean(game->apple[2], x + 32, y, game->frame);
 	else
-		ft_put_image_clean(game->apple[3], x, y, game->frame);
+		ft_put_image_clean(game->apple[3], x + 32, y, game->frame);
 }

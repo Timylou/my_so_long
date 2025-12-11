@@ -21,6 +21,9 @@
 # include <X11/X.h>
 # include "mlx.h"
 
+# define VELOCITY	7
+# define GRAVITY	15
+
 typedef struct s_img
 {
 	void	*img;
@@ -38,8 +41,7 @@ typedef struct t_player
 {
 	float	x;
 	float	y;
-
-	int		jump;
+	float	velocity;
 
 	int		key_jump;
 	int		key_run;
@@ -125,8 +127,10 @@ int		ft_handle_release(int keysym, t_game *game);
  * * * * * * */
 void	ft_init_player_images(t_player *player, t_game *game);
 void	ft_set_pos_player(t_game *game, int x, int y);
-void	ft_move_player(t_game *game);
+void	ft_move_player(t_game *game, float dt);
 void	ft_move_camera(t_game *game, float speed);
+float	ft_jump(t_game *game, float dt);
+int		ft_check_mouvement(char block);
 
 /* * * * * * * * *
  *  animation *
@@ -167,6 +171,7 @@ t_img	*ft_get_tile(t_img *tileset, int tilesize, int tilenum, t_game *game);
  * * * * * */
 
 long	get_time_ms(void);
+float	get_delta_time(void);
 
 /* * * * * *
  *  utils *
