@@ -46,16 +46,12 @@ void	ft_set_pos_player(t_game *game, int x, int y)
 {
 	game->player->x = x;
 	game->player->y = y;
-	game->cam_x = x * 64 - 5 * 64;
-	if (game->cam_x < 0)
+	game->cam_x = (x * 64) - (10 * 64);
+	game->cam_y = (y * 64) - (5 * 64);
+	if (game->player->x < 10)
 		game->cam_x = 0;
-	if (game->cam_x >= game->w_width)
-		game->cam_x = game->w_width - 64;
-	game->cam_y = y * 64 - 5 * 64;
-	if (game->cam_y < 0)
-		game->cam_y = 0;
-	if (game->cam_y >= game->w_height)
-		game->cam_y = game->w_height - 64;
+	if (game->player->x > game->m_width - 20)
+		game->cam_x = (game->m_width - 30) * 64;
 }
 
 static int	ft_check_mouvement(char block)
