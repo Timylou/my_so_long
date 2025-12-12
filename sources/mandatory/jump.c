@@ -17,22 +17,54 @@ int	ft_check_mouvement(char block)
 	return (!('0' < block && block < '8'));
 }
 
+void	ft_jump_animation(t_game *game, int left)
+{
+	float		px;
+	float		py;
+	float		velocity;
+
+	px = game->player->x * 64 - game->cam_x;
+	py = game->player->y * 64 - game->cam_y;
+	left *= 8;
+	velocity = game->player->velocity;
+	if (-2 <= velocity && velocity <= 2)
+		ft_put_image_clean(game->player->jump[3 + left], px, py, game->frame);
+	else if (velocity > 0 && velocity > VELOCITY - 0.6)
+		ft_put_image_clean(game->player->jump[1 + left], px, py, game->frame);
+	else if (velocity > 0 && velocity > 2)
+		ft_put_image_clean(game->player->jump[2 + left], px, py, game->frame);
+	else if (velocity < 0 && velocity < -2)
+		ft_put_image_clean(game->player->jump[4 + left], px, py, game->frame);
+	else if (velocity < 0 && velocity < -4)
+		ft_put_image_clean(game->player->jump[4 + left], px, py, game->frame);
+	else
+		ft_put_image_clean(game->player->jump[0 + left], px, py, game->frame);
+}
+
+static float	ft_init_jump(float *dt, float *g, t_game *game)
+{
+	float	new_y;
+
+	if (*dt > 0.15)
+		*dt = 0.15;
+	*g = -GRAVITY;
+	if (game->player->velocity < 0)
+		*g = -GRAVITY - 3;
+	new_y = game->player->y - game->player->velocity * *dt;
+	game->player->velocity += (*g * *dt);
+	if (new_y < 0)
+		new_y = 0;
+	return (new_y);
+}
+
 float	ft_jump(t_game *game, float dt)
 {
 	float	new_y;
 	float	g;
 
-	if (dt > 0.15)
-		dt = 0.15;
-	g = -GRAVITY;
-	if (game->player->velocity < 0)
-		g = -GRAVITY - 3;
 	if (!game->player->key_jump)
 		return (game->player->y);
-	new_y = game->player->y - game->player->velocity * dt;
-	game->player->velocity += (g * dt);
-	if (new_y < 0)
-		new_y = 0;
+	new_y = ft_init_jump(&dt, &g, game);
 	if (game->player->velocity < 0 && new_y > game->m_height - 2)
 	{
 		new_y = game->m_height - 2;
@@ -40,7 +72,8 @@ float	ft_jump(t_game *game, float dt)
 		game->player->velocity = VELOCITY;
 		return (new_y);
 	}
-	if (new_y < game->m_height - 2.5 && (game->player->velocity < 0) && (game->map[(int)(new_y + 1)][(int)(game->player->x)] == '1'))
+	if (new_y < game->m_height - 2.5 && (game->player->velocity < 0)
+		&& (game->map[(int)(new_y + 1)][(int)(game->player->x)] == '1'))
 	{
 		game->player->key_jump = 0;
 		game->player->velocity = VELOCITY;

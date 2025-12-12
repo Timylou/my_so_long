@@ -25,13 +25,13 @@ static void	ft_switch_camera(char block, int x, int y, t_game *game)
 	else if (block == '3')
 		ft_put_image_clean(game->platforms[2], x, y, game->frame);
 	else if (block == '2')
-		ft_put_image_clean(game->platforms[3], x - 64, y, game->frame);	
+		ft_put_image_clean(game->platforms[3], x - 64, y, game->frame);
 	else if (block == '7')
-		ft_put_image_clean(game->platforms[4], x - 64, y, game->frame);	
+		ft_put_image_clean(game->platforms[4], x - 64, y, game->frame);
 	else if (block == '6')
-		ft_put_image_clean(game->platforms[5], x - 64, y, game->frame);	
+		ft_put_image_clean(game->platforms[5], x - 64, y, game->frame);
 	else if (block == '5')
-		ft_put_image_clean(game->platforms[6], x - 64, y, game->frame);	
+		ft_put_image_clean(game->platforms[6], x - 64, y, game->frame);
 	else if (!game->coins && block == 'E')
 		ft_exit_animation(game, x, y);
 	else if (block == 'C')

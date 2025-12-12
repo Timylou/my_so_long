@@ -55,7 +55,7 @@ static void	ft_init_player(t_game *game)
 	player->key_left = 0;
 	player->key_right = 0;
 	game->player = player;
-	ft_init_player_images(player, game);
+	ft_init_player_images(player, game, -1);
 }
 
 static void	ft_init_frame(t_game *game)

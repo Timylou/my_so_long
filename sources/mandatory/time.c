@@ -14,14 +14,15 @@
 
 float	get_delta_time(void)
 {
-	static long last = 0;
-	long now = get_time_ms();
-	float dt;
+	static long	last = 0;
+	long		now;
+	float		dt;
 
+	now = get_time_ms();
 	if (last == 0)
 	{
 		last = now;
-		return 0.0f;
+		return (0.0f);
 	}
 	dt = (now - last) / 1000.0f;
 	last = now;

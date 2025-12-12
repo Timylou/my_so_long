@@ -30,7 +30,7 @@ int	ft_handle_input(int keysym, t_game *game)
 		if (keysym == XK_a)
 			game->player->key_left = 1;
 		else if (keysym == XK_d)
-		game->player->key_right = 1;
+			game->player->key_right = 1;
 	}
 	else if (keysym == XK_Shift_L)
 		game->player->key_run = 1;

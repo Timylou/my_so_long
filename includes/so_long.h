@@ -51,6 +51,7 @@ typedef struct t_player
 	t_img	*idle[4];
 	t_img	*walk[8];
 	t_img	*run[16];
+	t_img	*jump[16];
 }				t_player;
 
 typedef struct s_game
@@ -125,7 +126,8 @@ int		ft_handle_release(int keysym, t_game *game);
 /* * * * * * *
  *  player *
  * * * * * * */
-void	ft_init_player_images(t_player *player, t_game *game);
+
+void	ft_init_player_images(t_player *player, t_game *game, int i);
 void	ft_set_pos_player(t_game *game, int x, int y);
 void	ft_move_player(t_game *game, float dt);
 void	ft_move_camera(t_game *game, float speed);
@@ -142,6 +144,7 @@ void	ft_run_animation(t_game *game, int look_left, long time);
 void	ft_exit_animation(t_game *game, int x, int y);
 void	ft_apple_animation(t_game *game, int x, int y);
 void	ft_star_animation(t_game *game, int x, int y);
+void	ft_jump_animation(t_game *game, int left);
 
 /* * * * * *
  *  loop *

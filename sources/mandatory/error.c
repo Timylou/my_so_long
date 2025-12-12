@@ -22,8 +22,6 @@ static void	ft_free_imgs(t_game *game)
 		if (i < 3 && game->backgrounds[i])
 			ft_free_image(game->backgrounds[i], game);
 		if (i < 4 && game->player->idle[i])
-			ft_free_image(game->player->idle[i], game);
-		if (i < 4 && game->star[i])
 			ft_free_image(game->star[i], game);
 		if (i < 4 && game->apple[i])
 			ft_free_image(game->apple[i], game);
@@ -31,10 +29,6 @@ static void	ft_free_imgs(t_game *game)
 			ft_free_image(game->exit[i], game);
 		if (i < 7 && game->platforms[i])
 			ft_free_image(game->platforms[i], game);
-		if (i < 8 && game->player->walk[i])
-			ft_free_image(game->player->walk[i], game);
-		if (i < 16 && game->player->run[i])
-			ft_free_image(game->player->run[i], game);
 		i++;
 	}
 	if (game->frame)
@@ -43,8 +37,23 @@ static void	ft_free_imgs(t_game *game)
 
 static void	ft_free_player(t_game *game)
 {
+	int	i;
+
 	if (!game->player)
 		return ;
+	i = 0;
+	while (i < 16)
+	{
+		if (i < 4 && game->player->idle[i])
+			ft_free_image(game->player->idle[i], game);
+		if (i < 8 && game->player->walk[i])
+			ft_free_image(game->player->walk[i], game);
+		if (i < 16 && game->player->run[i])
+			ft_free_image(game->player->run[i], game);
+		if (i < 16)
+			ft_free_image(game->player->jump[i], game);
+		i++;
+	}
 	free(game->player);
 }
 
