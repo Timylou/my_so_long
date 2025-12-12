@@ -66,6 +66,8 @@ static void	ft_mouvement(t_game *game, float new_x, float new_y, float dt)
 		game->map[(int)new_y][(int)new_x] = 'A';
 		game->coins -= 1;
 	}
+	if (!game->coins && game->map[(int)new_y][(int)(new_x)] == 'E')
+		mlx_loop_end(game->mlx);
 	if (!game->player->key_jump
 		&& game->map[(int)(new_y + 1)][(int)new_x] != '1')
 	{
