@@ -77,3 +77,49 @@ void	ft_death_animation(t_game *game, int x, int y, int lft)
 	else
 		ft_put_image_clean(game->player->dead[7 + lft * 8], x, y, game->frame);
 }
+
+static void	ft_draw_attack(t_game *game, float x, float y, int look_left)
+{
+	int	i;
+	int	px;
+	int	py;
+
+	px = x * 64 - game->cam_x;
+	py = y * 64 - game->cam_y;
+	if (!game->player->key_attack)
+	{
+		ft_put_image_clean(game->player->attack[look_left * 8], px, py, game->frame);
+		return ;
+	}
+	i = (game->player->key_attack - 1) + look_left * 8;
+	ft_put_image_clean(game->player->attack[i], px, py, game->frame);
+}
+
+void	ft_attack_animation(t_game *game, int look_left)
+{
+	static long	timer = 0;
+	long		time;
+
+	time = get_time_ms();
+	if (!timer)
+		timer = time + 800;
+	if (time > timer)
+		timer = 0;
+	else if (timer - time > 700)
+		game->player->key_attack = 1;
+	else if (timer - time > 600)
+		game->player->key_attack = 2;
+	else if (timer - time > 500)
+		game->player->key_attack = 3;
+	else if (timer - time > 400)
+		game->player->key_attack = 4;
+	else if (timer - time > 300)
+		game->player->key_attack = 5;
+	else if (timer - time > 200)
+		game->player->key_attack = 6;
+	else if (timer - time > 100)
+		game->player->key_attack = 7;
+	else
+		game->player->key_attack = 0;
+	ft_draw_attack(game, game->player->x, game->player->y, look_left);
+}

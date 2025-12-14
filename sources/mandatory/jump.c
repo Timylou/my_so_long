@@ -47,8 +47,8 @@ static float	ft_init_jump(float *dt, float *g, t_game *game)
 
 	if (*dt > 0.15)
 		*dt = 0.15;
-	if (*dt <= 0)
-		*dt = 0;
+	if (*dt <= 0.01)
+		*dt = 0.01;
 	*g = -GRAVITY;
 	if (game->player->velocity < 0)
 		*g = -GRAVITY - 3;

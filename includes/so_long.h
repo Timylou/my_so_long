@@ -43,6 +43,7 @@ typedef struct t_player
 	float	y;
 	float	velocity;
 
+	int		key_attack;
 	int		key_jump;
 	int		key_run;
 	int		key_left;
@@ -149,6 +150,7 @@ void	ft_apple_animation(t_game *game, int x, int y);
 void	ft_star_animation(t_game *game, int x, int y);
 void	ft_jump_animation(t_game *game, int left);
 void	ft_death_animation(t_game *game, int x, int y, int lft);
+void	ft_attack_animation(t_game *game, int look_left);
 
 /* * * * * *
  *  loop *

@@ -51,6 +51,7 @@ static void	ft_init_player(t_game *game)
 	player->x = -1;
 	player->y = -1;
 	player->velocity = VELOCITY;
+	player->key_attack = 0;
 	player->key_jump = 0;
 	player->key_run = 0;
 	player->key_left = 0;

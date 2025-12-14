@@ -31,6 +31,8 @@ int	ft_handle_input(int keysym, t_game *game)
 	}
 	else if (keysym == XK_Shift_L)
 		game->player->key_run = 1;
+	else if (keysym == XK_e && !game->player->key_attack)
+		game->player->key_attack = 1;
 	return (1);
 }
 

@@ -66,10 +66,7 @@ static void	ft_mouvement(t_game *game, float new_x, float new_y, float dt)
 		new_x = game->m_width - 1;
 	if (game->map[(int)game->player->y][(int)new_x])
 		game->player->x = new_x;
-	if (game->map[(int)new_y][(int)game->player->x])
-		game->player->y = new_y;
 	new_x = game->player->x;
-	new_y = game->player->y;
 	if (game->map[(int)new_y][(int)(new_x)] == 'C')
 	{
 		game->map[(int)new_y][(int)new_x] = 'A';
@@ -99,6 +96,7 @@ void	ft_move_player(t_game *game, float dt)
 		speed = 0.1;
 	new_x = 0;
 	new_y = ft_jump(game, dt);
+	game->player->y = new_y;
 	if (!game->player->key_left && !game->player->key_right
 		&& !game->player->key_jump)
 		return ;
@@ -126,6 +124,8 @@ void	ft_draw_player(t_game *game, long time)
 	if (game->end)
 		ft_death_animation(game, player->x * 64 - game->cam_x,
 			player->y * 64 - game->cam_y, look_left);
+	else if (player->key_attack)
+		ft_attack_animation(game, look_left);
 	else if (player->key_jump)
 		ft_jump_animation(game, look_left);
 	else if ((player->key_left || player->key_right) && player->key_run)
