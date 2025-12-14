@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   loop.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yel-mens <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: yel-mens <yel-mens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/03 22:16:06 by yel-mens          #+#    #+#             */
-/*   Updated: 2025/12/03 22:16:06 by yel-mens         ###   ########.fr       */
+/*   Updated: 2025/12/12 19:58:43 by yel-mens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ int	ft_loop(t_game *game)
 
 	dt = get_delta_time();
 	time = get_time_ms() % 1000;
-	ft_move_player(game, dt);
+	if (!game->end)
+		ft_move_player(game, dt);
 	ft_clear_frame(game);
 	ft_draw_platforms(game);
 	ft_draw_player(game, time);

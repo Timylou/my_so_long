@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yel-mens <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: yel-mens <yel-mens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/03 20:15:07 by yel-mens          #+#    #+#             */
-/*   Updated: 2025/12/03 20:15:09 by yel-mens         ###   ########.fr       */
+/*   Updated: 2025/12/13 23:08:49 by yel-mens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ typedef struct t_player
 	t_img	*walk[8];
 	t_img	*run[16];
 	t_img	*jump[16];
+	t_img	*dead[16];
+	t_img	*attack[16];
 }				t_player;
 
 typedef struct s_game
@@ -72,6 +74,7 @@ typedef struct s_game
 	float		cam_y;
 
 	int			coins;
+	int			end;
 
 	t_img		*backgrounds[3];
 	t_img		*platforms[7];
@@ -145,6 +148,7 @@ void	ft_exit_animation(t_game *game, int x, int y);
 void	ft_apple_animation(t_game *game, int x, int y);
 void	ft_star_animation(t_game *game, int x, int y);
 void	ft_jump_animation(t_game *game, int left);
+void	ft_death_animation(t_game *game, int x, int y, int lft);
 
 /* * * * * *
  *  loop *

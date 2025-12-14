@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   independant_animation.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yel-mens <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: yel-mens <yel-mens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/10 15:12:46 by yel-mens          #+#    #+#             */
-/*   Updated: 2025/12/10 15:12:47 by yel-mens         ###   ########.fr       */
+/*   Updated: 2025/12/13 22:45:47 by yel-mens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,4 +47,33 @@ void	ft_star_animation(t_game *game, int x, int y)
 		return ;
 	}
 	ft_animate_star(game, timer - time, x, y);
+}
+
+void	ft_death_animation(t_game *game, int x, int y, int lft)
+{
+	static long	timer = 0;
+	long		time;
+
+	game->end = 1;
+	time = get_time_ms();
+	if (!timer)
+		timer = time + 1800;
+	if (time > timer + 500)
+		mlx_loop_end(game->mlx);
+	else if (timer - time > 1575)
+		ft_put_image_clean(game->player->dead[0 + lft * 8], x, y, game->frame);
+	else if (timer - time > 1350)
+		ft_put_image_clean(game->player->dead[1 + lft * 8], x, y, game->frame);
+	else if (timer - time > 1125)
+		ft_put_image_clean(game->player->dead[2 + lft * 8], x, y, game->frame);
+	else if (timer - time > 900)
+		ft_put_image_clean(game->player->dead[3 + lft * 8], x, y, game->frame);
+	else if (timer - time > 675)
+		ft_put_image_clean(game->player->dead[4 + lft * 8], x, y, game->frame);
+	else if (timer - time > 450)
+		ft_put_image_clean(game->player->dead[5 + lft * 8], x, y, game->frame);
+	else if (timer - time > 225)
+		ft_put_image_clean(game->player->dead[6 + lft * 8], x, y, game->frame);
+	else
+		ft_put_image_clean(game->player->dead[7 + lft * 8], x, y, game->frame);
 }

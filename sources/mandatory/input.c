@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yel-mens <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: yel-mens <yel-mens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/03 22:08:11 by yel-mens          #+#    #+#             */
-/*   Updated: 2025/12/03 22:08:12 by yel-mens         ###   ########.fr       */
+/*   Updated: 2025/12/12 19:50:37 by yel-mens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,7 @@
 int	ft_handle_input(int keysym, t_game *game)
 {
 	if (keysym == XK_Escape)
-	{
-		mlx_loop_end(game->mlx);
-		return (1);
-	}
+		game->end = 1;
 	else if (keysym == XK_space)
 		game->player->key_jump = 1;
 	else if (keysym == XK_Down)

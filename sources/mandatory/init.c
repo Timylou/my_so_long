@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yel-mens <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: yel-mens <yel-mens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/03 20:14:43 by yel-mens          #+#    #+#             */
-/*   Updated: 2025/12/03 20:14:44 by yel-mens         ###   ########.fr       */
+/*   Updated: 2025/12/12 19:22:49 by yel-mens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ static void	ft_init_mlx_win(t_game *game)
 		ft_error("mlx window init error\n", game);
 	game->mlx = mlx;
 	game->win = win;
+	game->end = 0;
 }
 
 static void	ft_init_player(t_game *game)

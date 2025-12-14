@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yel-mens <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: yel-mens <yel-mens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/04 19:11:05 by yel-mens          #+#    #+#             */
-/*   Updated: 2025/12/04 19:11:08 by yel-mens         ###   ########.fr       */
+/*   Updated: 2025/12/13 23:15:17 by yel-mens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +29,14 @@ void	ft_init_player_images(t_player *player, t_game *game, int i)
 			player->walk[i] = ft_get_tile(tileset, 64, 16 + i, game);
 		if (i < 4)
 			player->walk[4 + i] = flip_xpm_horizontally(player->walk[i], game);
-		if (i < 8)
-			player->run[i] = ft_get_tile(tileset, 64, 24 + i, game);
-		if (i < 8)
-			player->run[8 + i] = flip_xpm_horizontally(player->run[i], game);
-		if (i < 8)
-			player->jump[i] = ft_get_tile(tileset, 64, 40 + i, game);
-		if (i < 8)
-			player->jump[8 + i] = flip_xpm_horizontally(player->jump[i], game);
+		player->run[i] = ft_get_tile(tileset, 64, 24 + i, game);
+		player->run[8 + i] = flip_xpm_horizontally(player->run[i], game);
+		player->jump[i] = ft_get_tile(tileset, 64, 40 + i, game);
+		player->jump[8 + i] = flip_xpm_horizontally(player->jump[i], game);
+		player->dead[i] = ft_get_tile(tileset, 64, 56 + i, game);
+		player->dead[8 + i] = flip_xpm_horizontally(player->dead[i], game);
+		player->attack[i] = ft_get_tile(tileset, 64, 64 + i, game);
+		player->attack[8 + i] = flip_xpm_horizontally(player->attack[i], game);
 	}
 	ft_free_image(tileset, game);
 }
@@ -60,14 +60,23 @@ void	ft_set_pos_player(t_game *game, int x, int y)
 
 static void	ft_mouvement(t_game *game, float new_x, float new_y, float dt)
 {
-	game->player->x = new_x;
+	if (new_x < 1)
+		new_x = 1;
+	if (new_x > game->m_width - 1)
+		new_x = game->m_width - 1;
+	if (game->map[(int)game->player->y][(int)new_x])
+		game->player->x = new_x;
+	if (game->map[(int)new_y][(int)game->player->x])
+		game->player->y = new_y;
+	new_x = game->player->x;
+	new_y = game->player->y;
 	if (game->map[(int)new_y][(int)(new_x)] == 'C')
 	{
 		game->map[(int)new_y][(int)new_x] = 'A';
 		game->coins -= 1;
 	}
 	if (!game->coins && game->map[(int)new_y][(int)(new_x)] == 'E')
-		mlx_loop_end(game->mlx);
+		ft_death_animation(game, new_x * 64 - game->cam_x, new_y * 64 - game->cam_y, 0);
 	if (!game->player->key_jump
 		&& game->map[(int)(new_y + 1)][(int)new_x] != '1')
 	{
@@ -90,7 +99,6 @@ void	ft_move_player(t_game *game, float dt)
 		speed = 0.1;
 	new_x = 0;
 	new_y = ft_jump(game, dt);
-	game->player->y = new_y;
 	if (!game->player->key_left && !game->player->key_right
 		&& !game->player->key_jump)
 		return ;
@@ -115,7 +123,10 @@ void	ft_draw_player(t_game *game, long time)
 		look_left = 0;
 	if (player->key_left || (look_left && !player->key_right))
 		look_left = 1;
-	if (player->key_jump)
+	if (game->end)
+		ft_death_animation(game, player->x * 64 - game->cam_x,
+			player->y * 64 - game->cam_y, look_left);
+	else if (player->key_jump)
 		ft_jump_animation(game, look_left);
 	else if ((player->key_left || player->key_right) && player->key_run)
 		ft_run_animation(game, look_left, time);

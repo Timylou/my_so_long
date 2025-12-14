@@ -6,7 +6,7 @@
 /*   By: yel-mens <yel-mens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/14 21:45:45 by yel-mens          #+#    #+#             */
-/*   Updated: 2025/10/23 12:00:21 by yel-mens         ###   ########.fr       */
+/*   Updated: 2025/12/12 19:51:26 by yel-mens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,12 @@ static void	ft_free_player(t_game *game)
 			ft_free_image(game->player->walk[i], game);
 		if (i < 16 && game->player->run[i])
 			ft_free_image(game->player->run[i], game);
-		if (i < 16)
+		if (i < 16 && game->player->jump[i])
 			ft_free_image(game->player->jump[i], game);
+		if (i < 16 && game->player->dead[i])
+			ft_free_image(game->player->dead[i], game);
+		if (i < 16 && game->player->attack[i])
+			ft_free_image(game->player->attack[i], game);
 		i++;
 	}
 	free(game->player);

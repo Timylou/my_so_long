@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   jump.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yel-mens <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: yel-mens <yel-mens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 16:49:19 by yel-mens          #+#    #+#             */
-/*   Updated: 2025/12/11 16:49:19 by yel-mens         ###   ########.fr       */
+/*   Updated: 2025/12/13 23:09:06 by yel-mens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,13 +47,21 @@ static float	ft_init_jump(float *dt, float *g, t_game *game)
 
 	if (*dt > 0.15)
 		*dt = 0.15;
+	if (*dt <= 0)
+		*dt = 0;
 	*g = -GRAVITY;
 	if (game->player->velocity < 0)
 		*g = -GRAVITY - 3;
 	new_y = game->player->y - game->player->velocity * *dt;
 	game->player->velocity += (*g * *dt);
+	if (game->player->velocity > 10)
+		game->player->velocity = 10;
+	if (game->player->velocity < -10)
+		game->player->velocity = -10;
 	if (new_y < 0)
 		new_y = 0;
+	if (new_y > game->m_height - 1)
+		new_y = game->m_height - 1;
 	return (new_y);
 }
 
